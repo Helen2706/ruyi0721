@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="{{ url_for('static',filename='img/icon.jpg') }}" rel="shortcut icon" type="image/x-icon">
+<link href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ url_for('static',filename='bootstrap/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+
+<link href="{{ url_for('static',filename='bootstrap/css/animate.css') }}" rel="stylesheet">
+<link href="{{ url_for('static',filename='bootstrap/css/style.css') }}" rel="stylesheet">
+<link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
+
+<!-- Mainly scripts -->
+<script src="{{ url_for('static',filename='bootstrap/js/jquery-2.1.1.js') }}"></script>
+<script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+{% endblock head %}
+
+
+{% block body %}
+<body class="pace-done">
+
+<div id="wrapper">
+
+    {% include 'menu.html' %}
+
+    <div id="page-wrapper" class="gray-bg" style="min-height: 832px;">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                </div>
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" id="username">
+                            <img alt="100x100" class="img-circle"
+                                 {% if current_user %}
+                                 src="{{ url_for('static',filename='useravatar/'+current_user.username+'.jpg')}}"
+                                 {% endif %}
+                                 onerror="this.src='{{ url_for('static',filename='useravatar/default_avatar.jpg')}}'"
+                                 style="width:40px;height:40px"/>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" id="dropdown-menu">
+                            <li><a href="#">基本资料</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">设置</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">意见反馈</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{url_for('user.logout')}}">注销</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        {% block maintitle %}
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2>
+                    {% block titletext %}
+                    {% endblock titletext %}
+                </h2>
+                <ol class="breadcrumb">
+                    <strong>
+                        {% block pagename %}
+                        {% endblock pagename %}
+                    </strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-sm-8">
+                <div class="title-action">
+                    <a href="/" class="btn btn-primary">回首页</a></div>
+            </div>
+        </div>
+        {% endblock maintitle %}
+
+
+        <div class="wrapper wrapper-content">
+            {% block content %}
+            {% endblock content %}
+        </div>
+
+        <div class="footer">
+            <div class="pull-right">计算机学院
+                <strong>文化大数据实验室</strong></div>
+            <div>
+                <strong>Copyright</strong> 中传如艺版权所有 © 2017
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% block script %}
+<!-- Mainly scripts -->
+<script src="{{ url_for('static',filename='bootstrap/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+<script src="{{ url_for('static',filename='bootstrap/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="{{ url_for('static',filename='bootstrap/js/inspinia.js') }}"></script>
+<script src="{{ url_for('static',filename='bootstrap/js/plugins/pace/pace.min.js') }}"></script>
+{% endblock script %}
+
+</body>
+{% endblock body %}

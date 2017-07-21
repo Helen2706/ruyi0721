@@ -1,0 +1,9 @@
+Flask
+py2neo==3.1.2
+flask_sqlalchemy
+flask_login
+flask_mail
+flask_script
+pymysql
+pillow
+igraph

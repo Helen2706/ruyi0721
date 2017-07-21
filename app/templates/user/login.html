@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/css/bootstrap.css') }}">
+    <link href="{{ url_for('static',filename='bootstrap/css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='img/icon.jpg') }}" rel="shortcut icon"  type="image/x-icon">
+    <style>
+    body{
+        background-color:#F4F4F4;
+    }
+    </style>
+    <title>用户登录</title>
+</head>
+<body>
+<div>
+    <div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-2"></div>
+        <div class="col-md-10 column">
+            <div>
+                <br><br>
+                <div class="col-sm-9">
+                    <h1>
+                        如艺剧本
+                    </h1>
+                </div>
+                <div class="col-sm-1"><br>
+                    <a href="{{url_for('user.register')}}" class="btn btn-primary">注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        <br>
+    </div>
+    <div class="row clearfix" id="regform" style="background-image:url('/static/img/background.jpg');min-height:730px">
+        <br><br><br><br><br><br>
+        <div class="col-md-7 column">
+        </div>
+
+        <div class="col-md-3 column" style="background-color:#fff;height:320px">
+            <br><br>
+            <h3 class="text-center">
+				用户登录
+            </h3><br/><br>
+            <form class="form-horizontal" role="form" id="loginForm" method="post" action="{{url_for('user.login')}}">
+                <div class="form-group">
+                    <label for="username"  class="col-sm-3 control-label">用户名：</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="username" id="username" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password"  class="col-sm-3 control-label">密码：</label>
+                    <div class="col-sm-7">
+                        <input type="password" name="password" id="password" class="form-control">
+                        <p class="help-block" id="helpmessage"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-sm-3">
+                    </span>
+                    <span class="col-sm-7">
+                        <input type="submit" class="btn btn-primary btn-block" value="登 录">
+                    </span>
+                </div>
+            </form>
+            {% for message in get_flashed_messages() %}
+            <br><br>
+            <div class="container alert alert-warning alert-dismissable" style="width:40%">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static',filename='js/jquery-3.2.1.js') }}"></script>
+<script src="{{ url_for('static',filename='js/jquery.validate.js') }}"></script>
+
+
+<script>
+    $(document).ready(function(){
+        var validator;
+        validator = $("#loginForm").validate({
+            rules:{
+                username:{
+                    required:true,
+                    minlength:2,
+                    maxlength:15,
+                    remote:{
+                        url:"login/validate/username",
+                        type:"post",
+                        data:{
+                            username:function(){return $("#username").val();}
+                        }
+                    }
+                },
+                password:{
+                    required:true,
+                    minlength:6,
+                    maxlength:15,
+                    validateUser:true       //自定义验证方法用于验证密码是否正确
+                }
+            },
+            messages:{          //自定义提示信息
+                username:{
+                    required:"用户名必填",
+                    minlength:"最小长度为2",
+                    maxlength:"最大长度为15",
+                    remote:"用户名不存在"
+                },
+                password:{
+                    required:"密码必填",
+                    minlength:"密码最小长度为6",
+                    maxlength:"密码最大长度为15"
+                }
+            },
+            errorPlacement: function(error, element) {      //错误信息的位置
+                error.appendTo( element.parent() );
+            }
+        });
+        $.validator.addMethod(  //添加自定义验证函数
+        "validateUser",       //自定义验证函数的名称
+            function(value,element,params){
+                $.ajax({        //发送Ajax请求
+                    type:"POST",
+                    url:"/user/validate/password",
+                    dataType:"json",    //数据类型为json,发回的数据已自动解析
+                    data:{
+                        username:function(){return $("#username").val();},
+                        password:function(){return $("#password").val();}
+                    },
+                    success:function(data){
+                        if(!data){      //根据返回的信息在指定位置提示用户
+                            $("#helpmessage").html("用户名或密码错误");
+                        }else
+                            $("#helpmessage").html("");
+                    }
+                });
+                return true;
+            },
+            "用户名或密码错误"
+        );
+    });
+</script>
+
+</body>
+</html>
