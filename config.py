@@ -6,7 +6,7 @@ import os
 
 class Config:
     SECRET_KEY = os.urandom(128)
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@127.0.0.1:3306/ruyi20170622'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@10.64.132.102:3306/ruyi20170622'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
@@ -25,7 +25,6 @@ class DevelopmentConfig(Config):
     UPLOAD_FOLDER_PROJECT=os.path.abspath('app/static/poster')
     UPLOAD_FOLDER_USER = os.path.abspath('app/static/useravatar')
     ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif']
-
 
 
 config = {

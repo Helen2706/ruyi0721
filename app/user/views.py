@@ -27,8 +27,13 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user:
             if user.verify_password(password):
-                login_user(user, )
-                return redirect(request.args.get('next') or url_for('user.index'))
+                login_user(user)
+                if user.is_userInfo_completed:
+                    return redirect(request.args.get('next') or url_for('user.index'))
+                elif user.fk_role==1:
+                    return render_template('user/admin_first_login.html')
+                elif user.fk_role==11:
+                    return render_template('user/user_first_login.html')
             else:
                 flash("用户名或密码错误！")
         else:
@@ -64,16 +69,21 @@ def register():
         email = request.form.get("email")
         username = request.form.get("username")
         password = request.form.get("password")
-        #elephone = request.form.get("telephone")
-        confirmcode = request.form.get("confirmcode")
+        #telephone = request.form.get("telephone")
+        #confirmcode = request.form.get("confirmcode")
         user = User(email, username, password)
-        if(confirmcode==session['code_text']):
-            db.session.add(user)
-            db.session.commit()
-            # token = user.generate_confirmation_token()
-            # send_email(user.email,'确认账户','user/email/email_body',user=user,token=token)
-            login_user(user, True)
-            return render_template("user/emailInfo.html")
+        userRole = request.form.get("userRole")
+        if userRole == 'companyStaff':
+            user.fk_role = 11
+        else:
+            user.fk_role = 1
+        db.session.add(user)
+        db.session.commit()
+        # token = user.generate_confirmation_token()
+        # send_email(user.email,'确认账户','user/email/email_body',user=user,token=token)
+        login_user(user, True)
+        return render_template("user/emailInfo.html")
+
 
 
 

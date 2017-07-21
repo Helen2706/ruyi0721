@@ -22,12 +22,14 @@ class User(UserMixin, db.Model):
     checked = db.Column(db.String(255))
     user_image = db.Column(db.String(255))
     fk_company_id = db.Column(db.Integer)
+    is_userInfo_completed = db.Column(db.Boolean)
 
 
     def __init__(self,email,username,password):
         self.email = email
         self.username = username
         self.password_hash = generate_password_hash(password)
+        self.is_userInfo_completed = 0
 
     @property
     def password(self):

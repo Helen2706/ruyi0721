@@ -89,7 +89,7 @@
                 username:{
                     required:true,
                     minlength:2,
-                    maxlength:15,
+                    maxlength:20,
                     remote:{
                         url:"login/validate/username",
                         type:"post",
@@ -115,7 +115,7 @@
                 password:{
                     required:"密码必填",
                     minlength:"密码最小长度为6",
-                    maxlength:"密码最大长度为15"
+                    maxlength:"密码最大长度为20"
                 }
             },
             errorPlacement: function(error, element) {      //错误信息的位置

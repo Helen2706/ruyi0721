@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +11,8 @@
         height:100px;
         background-color:#F4F4F4;
     }
+
+
 
     </style>
 </head>
@@ -36,11 +38,12 @@
         <br>
     </div>
     <div>
-        <div class="row clearfix" id="regform"  style="background-image:url('/static/img/background.jpg');min-height:730px">
+        <div class="row clearfix" id="regform"
+             style="background-image:url('/static/img/background.jpg');min-height:730px">
             <br><br><br><br><br><br>
             <div class="col-md-7 column">
             </div>
-            <div class="col-md-4 column" style="background-color:#fff;height:450px">
+            <div class="col-md-4 column" style="background-color:#fff;height:500px">
                 <br><br>
                 <h3 class="text-center">
                     用户注册
@@ -77,15 +80,28 @@
                             <input type="text" name="confirmcode" id="confirmcode" class="form-control">
                         </div>
                         <div class="col-sm-4">
-                            <label class="control-label" style="margin:0"><img src="{{ url_for('static',filename='img/code/code.jpg')}}"></label>
+                            <label class="control-label" style="margin:0"><img
+                                    src="{{ url_for('static',filename='img/code/code.jpg')}}"></label>
                         </div>
+                    </div>
+                    <!--注册时指定身份为公司的管理员为公司注册账号或编剧演员等普通身份-->
+                    <div class="form-group">
+                        <label class="col-sm-3"></label>
+                        <h4>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="userRole" value="companyAdmin">&nbsp&nbsp公司管理员
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="userRole" value="companyStaff"  checked>&nbsp&nbsp普通用户
+                            </label>
+                        </h4>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-3">
                         </div>
                         <div class="col-sm-4">
-                            <input type="checkbox" id="agreeProtlcol" name="agreeProtlcol" checked>同意<a
-                                href="{{url_for('user.register_protocol')}}" target="_blank">用户注册协议</a>
+                            <h4>&nbsp&nbsp<input type="checkbox" id="agreeProtlcol" name="agreeProtlcol" checked>&nbsp&nbsp&nbsp&nbsp同意<a
+                                    href="{{url_for('user.register_protocol')}}" target="_blank">用户注册协议</a></h4>
                         </div>
                     </div>
                     <div class="form-group">
@@ -193,6 +209,8 @@
             }
         });
     });
+
+
 
 </script>
 </body>
