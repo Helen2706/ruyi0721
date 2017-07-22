@@ -3,6 +3,7 @@
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
+from flask import url_for
 
 def generate_verification_image_code():
     # 随机字母:
@@ -38,6 +39,7 @@ def generate_verification_image_code():
 
     # 模糊:
     image = image.filter(ImageFilter.BLUR)
-    image.save('app/static/img/code/code.jpg', 'jpeg');
+    s = 'app/static/img/code/'+strs+'.jpg'
+    image.save(s, 'jpeg');
     return strs
 

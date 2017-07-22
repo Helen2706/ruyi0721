@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/css/bootstrap.css') }}">
+    <link href="{{ url_for('static',filename='bootstrap/css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='img/icon.jpg') }}" rel="shortcut icon"  type="image/x-icon">
+    <style>
+    body{
+        background-color:#F4F4F4;
+    }
+    #navigator{
+        background-image:url('/static/img/navigator_background.jpg');
+    }
+    #website_content{
+        background-color:#fff;
+        height:700px;
+    }
+
+
+    </style>
+    <title>完善公司资料</title>
+</head>
+<body>
+<!--此div是网站的导航栏-->
+<div class="container-fluid" id="navigator">
+    <div class="row clearfix">
+        <div class="col-md-2"></div>
+        <div class="col-md-10 column">
+            <div>
+                <br>
+                <div class="col-sm-9">
+                    <h1><b>如艺剧本</b></h1>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
+</div>
+<br><br>
+<!--此div是网站的主体部分-->
+<div class="container" id="website_content">
+    <div class="row clearfix">
+        <div class="col-md-2"></div>
+        <!--表单部分-->
+        <div class="col-md-8">
+            <br><br>
+            <h3 class="text-center">
+                完善公司资料
+            </h3><br/><br>
+            <form class="form-horizontal" role="form" id="companyInfoCompleteForm" method="post"
+                  action="{{url_for('user.admin_info_complete')}}">
+                <div class="form-group">
+                    <label for="company_name" class="col-sm-3 control-label">公司名称：</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="company_name" id="company_name" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="owner" class="col-sm-3 control-label">法人：</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="owner" id="owner" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address" class="col-sm-3 control-label">公司地址：</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="address" id="address" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tel" class="col-sm-3 control-label">公司电话：</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="tel" id="tel" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">邮箱：</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="email" id="email" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contacts" class="col-sm-3 control-label">联系人：</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="contacts" id="contacts" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contact_phone" class="col-sm-3 control-label">联系电话：</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="contact_phone" id="contact_phone" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-sm-3">
+                    </span>
+                    <span class="col-sm-7">
+                        <input type="submit" class="btn btn-primary btn-block" value="提交资料">
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+</body>
+</html>

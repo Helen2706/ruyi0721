@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/css/bootstrap.css') }}">
+    <link href="{{ url_for('static',filename='bootstrap/css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='img/icon.jpg') }}" rel="shortcut icon" type="image/x-icon">
+    <title>等待审核</title>
+    <style>
+        body{
+            background-color:#F4F4F4;
+        }
+    </style>
+</head>
+<body>
+<!--此div是网站的导航栏-->
+<div class="container-fluid" id="navigator">
+    <div class="row clearfix">
+        <div class="col-md-2"></div>
+        <div class="col-md-10 column">
+            <div>
+                <br>
+                <div class="col-sm-9">
+                    <h1><b>如艺剧本</b></h1>
+                </div>
+                <div class="col-sm-1"><br>
+                    <a href="{{url_for('main.home')}}" class="btn btn-primary">回首页</a>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
+</div>
+<br><br>
+
+<div class="container">
+    <h3>您的基本资料已提交，请耐心等待审核......</h3>
+</div>
+</body>
+</html>

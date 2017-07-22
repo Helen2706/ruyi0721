@@ -10,7 +10,7 @@ manager.add_command('runserver', Server('127.0.0.1', 5000))
 
 @myApp.route('/')
 def index():
-    return redirect(url_for('user.index'))
+    return redirect(url_for('main.home'))
 
 # 路由重定向，全部交给geteditor处理
 @myApp.route('/<projectId>/')

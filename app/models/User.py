@@ -30,6 +30,14 @@ class User(UserMixin, db.Model):
         self.username = username
         self.password_hash = generate_password_hash(password)
         self.is_userInfo_completed = 0
+        self.checked = 0
+
+    def user_info_complete(self,gender,phone,fk_role,fk_company_id):
+        self.gender = gender
+        self.phone = phone
+        self.fk_role = fk_role
+        self.fk_company_id = fk_company_id
+        self.is_userInfo_completed = 1
 
     @property
     def password(self):
