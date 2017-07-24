@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static',filename='img/icon.jpg') }}" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='bootstrap/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='bootstrap/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='bootstrap/css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
+    <title>完善用户资料</title>
+</head>
+<body>
+<!--左侧菜单列表-->
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear"> <h3 class="block m-t-xs"> <strong class="font-bold">中传如艺剧本系统</strong>
+                         </h3>  </span> </a>
+                </div>
+            </li>
+            {% for menu1 in menus1 %}
+            <li>
+                <a href="{{ menu1.menu_url }}"><i class="fa fa-home"></i> <span class="nav-label">{{ menu1.menu_name }}</span><span class="fa arrow"></span></a>
+                {% for menu2 in menus2 %}
+                {% if menu2.menu_name == menu1.menu_name %}
+                 <ul class="nav nav-second-level collapse" style="height: 0px;">
+                    <li>
+                        <a href="{{ menu2.menu_url }}"><i class="fa fa-list-ul"></i> <span class="nav-label">{{ menu2.menu2_name }}</span></a>
+                    </li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("li").removeClass("active");
+            if('{{ navId }}'){
+                $('li#{{ navId }}').addClass("active");
+            }
+            switch('{{ navId }}'){
+                case 'degreedistribute':
+                    $('li#analyse').addClass("active");
+                    break;
+            }
+        });
+    </script>
+</nav>
+</body>
+</html>

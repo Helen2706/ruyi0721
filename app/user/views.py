@@ -4,6 +4,7 @@ from app.user import user
 from flask_login import login_required, login_user, logout_user,current_user
 from flask import jsonify, redirect, url_for, render_template, request, flash,session
 from app.models.User import User
+from app.models.User_role import User_role
 from app.models.company import Company
 from .validate import generate_verification_image_code
 from app import db
@@ -128,8 +129,10 @@ def user_info_complete():
         phone = request.form.get("phone")
         fk_role = request.form.get("fk_role")
         fk_company_id = request.form.get("fk_company_id")
+        user_role = User_role(current_user.id,fk_company_id,fk_role)
         current_user.user_info_complete(gender,phone,fk_role,fk_company_id)
         db.session.add(current_user)
+        db.session.add(user_role)
         db.session.commit()
         return render_template('user/wait_company_check.html')
     else:
