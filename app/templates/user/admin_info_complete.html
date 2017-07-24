@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/css/bootstrap.css') }}">
+
+    <link href="{{ url_for('static',filename='img/icon.jpg') }}" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='bootstrap/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='bootstrap/css/animate.css') }}" rel="stylesheet">
     <link href="{{ url_for('static',filename='bootstrap/css/style.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static',filename='img/icon.jpg') }}" rel="shortcut icon"  type="image/x-icon">
+    <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
+
     <style>
     body{
         background-color:#F4F4F4;
@@ -16,6 +21,8 @@
         background-color:#fff;
         height:700px;
     }
+
+
 
 
     </style>
@@ -40,71 +47,175 @@
 </div>
 <br><br>
 <!--此div是网站的主体部分-->
-<div class="container" id="website_content">
+<div class="container">
     <div class="row clearfix">
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
         <!--表单部分-->
-        <div class="col-md-8">
+        <div class="col-md-6" id="website_content">
             <br><br>
-            <h3 class="text-center">
-                完善公司资料
-            </h3><br/><br>
-            <form class="form-horizontal" role="form" id="companyInfoCompleteForm" method="post"
-                  action="{{url_for('user.admin_info_complete')}}">
-                <div class="form-group">
-                    <label for="company_name" class="col-sm-3 control-label">公司名称：</label>
-                    <div class="col-sm-7">
-                        <input type="text" name="company_name" id="company_name" class="form-control">
-                    </div>
+            <!--表单上面的STYLE-->
+            <div>
+                <div align="center">
+                <a class="list-group-item active" style="margin: 12px;padding:10px;">
+                    <span class="fa fa-group" style="color:#fff;font-size: 80px"></span>
+                    <br><br>
+                    <h3>完善公司资料</h3>
+                </a>
                 </div>
-                <div class="form-group">
-                    <label for="owner" class="col-sm-3 control-label">法人：</label>
-                    <div class="col-sm-7">
-                        <input type="text" name="owner" id="owner" class="form-control">
+                <br>
+                <form class="form-horizontal" role="form" id="companyInfoCompleteForm" method="post"
+                      action="{{url_for('user.admin_info_complete')}}">
+                    <div class="form-group has-warning">
+                        <label for="company_name" class="col-sm-3 control-label">公司名称：</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="company_name" id="company_name" class="form-control">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="address" class="col-sm-3 control-label">公司地址：</label>
-                    <div class="col-sm-7">
-                        <input type="text" name="address" id="address" class="form-control">
+                    <div class="form-group has-warning">
+                        <label for="owner" class="col-sm-3 control-label">法人：</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="owner" id="owner" class="form-control">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="tel" class="col-sm-3 control-label">公司电话：</label>
-                    <div class="col-sm-7">
-                        <input type="text" name="tel" id="tel" class="form-control">
+                    <div class="form-group has-warning">
+                        <label for="address" class="col-sm-3 control-label">公司地址：</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="address" id="address" class="form-control">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="email" class="col-sm-3 control-label">邮箱：</label>
-                    <div class="col-sm-7">
-                        <input type="text" name="email" id="email" class="form-control">
+                    <div class="form-group has-warning">
+                        <label for="tel" class="col-sm-3 control-label">公司电话：</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="tel" id="tel" class="form-control">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="contacts" class="col-sm-3 control-label">联系人：</label>
-                    <div class="col-sm-7">
-                        <input type="text" name="contacts" id="contacts" class="form-control">
+                    <div class="form-group has-warning">
+                        <label for="email" class="col-sm-3 control-label">邮箱：</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="email" id="email" class="form-control">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="contact_phone" class="col-sm-3 control-label">联系电话：</label>
-                    <div class="col-sm-7">
-                        <input type="text" name="contact_phone" id="contact_phone" class="form-control">
+                    <div class="form-group has-warning">
+                        <label for="contacts" class="col-sm-3 control-label">联系人：</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="contacts" id="contacts" class="form-control">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
+                    <div class="form-group has-warning">
+                        <label for="contact_phone" class="col-sm-3 control-label">联系电话：</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="contact_phone" id="contact_phone" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
                     <span class="col-sm-3">
                     </span>
-                    <span class="col-sm-7">
+                        <span class="col-sm-7">
                         <input type="submit" class="btn btn-primary btn-block" value="提交资料">
                     </span>
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
         </div>
-        <div class="col-md-2"></div>
     </div>
-</div>
+    <!--对用户输入的公司信息进行格式控制，如公司名称不唯一等-->
+    <script src="{{ url_for('static',filename='js/jquery-3.2.1.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/jquery.validate.js') }}"></script>
+    <script>
+$(document).ready(function(){
+    $("#companyInfoCompleteForm").validate({
+        rules:{
+            company_name:{
+                required:true,
+                minlength:2,
+                maxlength:20,
+                remote:{
+                    url:"/user/validate/company_name",
+                    type:"post",
+                    data:{
+                        company_name:function(){return $("#company_name").val();}
+                    },
+                }
+            },
+            owner:{
+                required:true,
+                minlength:2,
+                maxlength:20,
+            },
+            contacts:{
+                required:true,
+                minlength:2,
+                maxlength:20,
+            },
+            contact_phone:{
+                required:true,
+                digits:true,
+                rangelength:[11,11],
+            },
+            email:{
+                required:true,
+                minlength:2,
+                maxlength:20,
+                email:true,
+            },
+            address:{
+                required:true,
+                minlength:2,
+                maxlength:100,
+            },
+            tel:{
+                required:true,
+                digits:true,
+                rangelength:[11,11],
+            },
+        },
+        messages:{
+            company_name:{
+                required:"公司名称必填",
+                minlength:"最小长度为2",
+                maxlength:"最大长度为20",
+                remote:"公司名称已存在"
+            },
+            owner:{
+                required:"法人名称必填",
+                minlength:"最小长度为2",
+                maxlength:"最大长度为20",
+            },
+            contacts:{
+                required:"联系人必填",
+                minlength:"最小长度为2",
+                maxlength:"最大长度为20",
+            },
+            contact_phone:{
+                required:"联系电话必填",
+                digits:"请输入11位联系电话",
+                rangelength:"请输入11位联系电话",
+            },
+            email:{
+                required:"邮箱必填",
+                minlength:"最小长度为2",
+                maxlength:"最大长度为20",
+                email:"请输入合法邮箱",
+            },
+            address:{
+                required:"公司地址必填",
+                minlength:"最小长度为2",
+                maxlength:"最大长度为100",
+            },
+            tel:{
+                required:"联系电话必填",
+                digits:"请输入11位联系电话",
+                rangelength:"请输入11位联系电话",
+            },
+        },
+        errorPlacement: function(error, element) {
+                error.appendTo( element.parent() );
+            }
+    });
+});
 
+
+    </script>
 </body>
 </html>

@@ -28,7 +28,8 @@ def login():
                 elif user.fk_role==6:
                     return render_template('user/admin_info_complete.html')
                 elif user.fk_role==11:
-                    return render_template('user/user_info_complete.html')
+                    companys = Company.query.all()
+                    return render_template('user/user_info_complete.html', companys=companys)
                 elif user.checked == 0:
                     return render_template('user/wait_company_check.html')
             else:
@@ -51,7 +52,7 @@ def validatepassword():
     username = request.form.get("username")       # 获取用户输入的信息
     password = request.form.get("password")
     user = User.query.filter_by(username=username).first()
-    if user is not None and user.verify_password(password):     #若与数据库中用户名密码匹配，返回true
+    if (user is not None) & user.verify_password(password):     #若与数据库中用户名密码匹配，返回true
         return jsonify(True)    # 返回json数据true，接收方会自动解析，当返回true时不显示信息
     return jsonify(False)       # 当返回false时显示“用户名或密码错误”
 
@@ -133,6 +134,14 @@ def user_info_complete():
         return render_template('user/wait_company_check.html')
     else:
         return redirect(url_for('main.home'))
+
+#管理员完善公司信息是保证公司名称唯一
+@user.route('/validate/company_name',methods=['POST','GET'])
+def validate_company_name():
+    company_name = request.form.get('company_name')
+    if Company.query.filter_by(company_name=company_name).first():
+        return jsonify(False)
+    return jsonify(True)
 
 #当公司管理员首次完善公司信息提交时的处理函数
 @user.route('/admin_info_complete',methods=['POST','GET'])

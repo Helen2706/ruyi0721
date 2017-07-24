@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/css/bootstrap.css') }}">
-    <link href="{{ url_for('static',filename='bootstrap/css/style.css') }}" rel="stylesheet">
     <link href="{{ url_for('static',filename='img/icon.jpg') }}" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='bootstrap/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='bootstrap/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='bootstrap/css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
     <style>
     body{
         background-color:#F4F4F4;
@@ -40,32 +43,45 @@
 </div>
 <br><br>
 <!--此div是网站的主体部分-->
-<div class="container" id="website_content">
+<div class="container">
     <div class="row clearfix">
-        <div class="col-md-2"></div>
+        <div class="col-md-3">
+
+        </div>
         <!--表单部分-->
-        <div class="col-md-8">
+        <div class="col-md-6"  id="website_content">
             <br><br>
-            <h3 class="text-center">
-                完善基本资料
-            </h3><br/><br>
+            <div align="center">
+                <a class="list-group-item active" style="margin: 12px;padding:10px;">
+                    <span class="fa fa-user" style="color:#fff;font-size: 80px"></span>
+                    <br><br>
+                    <h3>完善个人资料</h3>
+                </a>
+                </div>
+            <br>
             <form class="form-horizontal" role="form" id="userInfoCompleteForm" method="post"
                   action="{{url_for('user.user_info_complete')}}">
-                <div class="form-group">
+                <div class="form-group has-warning">
                     <label for="email" class="col-sm-3 control-label">邮箱：</label>
                     <div class="col-sm-7">
                         <input type="text" name="email" id="email" class="form-control"
                                placeholder="{{current_user.email}}" disabled>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group has-warning">
                     <label for="username" class="col-sm-3 control-label">用户名：</label>
                     <div class="col-sm-7">
                         <input type="username" name="username" id="username" class="form-control"
                                placeholder="{{current_user.username}}" disabled>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group has-warning">
+                    <label for="realname" class="col-sm-3 control-label">真实姓名：</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="realname" id="realname" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group has-warning">
                     <label for="gender" class="col-sm-3 control-label">性别：</label>
                     <div class="col-sm-7">
                         <label>
@@ -77,17 +93,17 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group has-warning">
                     <label for="phone" class="col-sm-3 control-label">手机号：</label>
                     <div class="col-sm-7">
                         <input type="text" name="phone" id="phone" class="form-control" placeholder="">
                     </div>
                 </div>
                 <!--用户选择自己的角色，value为角色的ID-->
-                <div class="form-group">
+                <div class="form-group has-warning">
                     <label for="phone" class="col-sm-3 control-label">角色：</label>
                     <div class="col-sm-7">
-                        <select class="form-control" name="fk_role">
+                        <select class="form-control" name="fk_role" style="background:#fff">
                             <option value="2">编剧</option>
                             <option value="3">导演</option>
                             <option value="4">制片人</option>
@@ -102,14 +118,13 @@
                 </div>
 
                 <!--用户选择所在的公司，value值为公司的ID-->
-                <div class="form-group">
+                <div class="form-group has-warning">
                     <label for="phone" class="col-sm-3 control-label">所属公司：</label>
                     <div class="col-sm-7">
                         <select class="form-control" name="fk_company_id">
-                            <option value="1">中传如艺</option>
-                            <option value="2">金田影金所</option>
-                            <option value="3">华谊</option>
-                            <option value="4">唐人</option>
+                            {% for company in companys %}
+                            <option value="{{company.id}}">{{company.company_name}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -123,9 +138,41 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
     </div>
 </div>
-
+<!--对用户输入的内容进行格式控制-->
+<script src="{{ url_for('static',filename='js/jquery-3.2.1.js') }}"></script>
+<script src="{{ url_for('static',filename='js/jquery.validate.js') }}"></script>
+<!--<script>-->
+    <!--$(document).ready(function(){-->
+        <!--$("#userInfoCompleteForm").validate({-->
+            <!--rules:{-->
+                <!--realname:{-->
+                    <!--required:true,-->
+                    <!--minlength:3,-->
+                    <!--maxlength:20-->
+                <!--},-->
+                <!--phone:{-->
+                    <!--required:true,-->
+                    <!--digits:true,-->
+                    <!--rangelength:[11,11]-->
+                <!--}-->
+            <!--},-->
+            <!--messages:{-->
+                <!--realname:{-->
+                    <!--required:"真实姓名必填",-->
+                    <!--minlength:"最小长度为3",-->
+                    <!--maxlength:"最大长度为20",-->
+                <!--},-->
+                <!--phone:{-->
+                    <!--required:"请填写手机号",-->
+                    <!--digits:"手机号应全为数字",-->
+                    <!--rangelength:"请输入11位手机号",-->
+                <!--}-->
+            <!--}-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
 </body>
 </html>

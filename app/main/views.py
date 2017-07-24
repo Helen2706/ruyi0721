@@ -6,6 +6,7 @@ from flask import render_template,redirect
 from flask_login import current_user,login_required
 from app.models.Role_menu import Role_menu
 from app.models.User_role import User_role
+from app.models.company import Company
 
 @main.route('/')
 @login_required
@@ -15,7 +16,8 @@ def home():
         if current_user.fk_role == 6:
             return render_template('user/admin_info_complete.html')
         else:
-            return render_template('user/user_info_complete.html')
+            companys = Company.query.all()
+            return render_template('user/user_info_complete.html',companys = companys )
     if current_user.checked == 0:
         return render_template('user/wait_company_check.html')
     # menu_list存储menu_id集合，menus2为对应的二级Menu类列表
